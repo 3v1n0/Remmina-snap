@@ -86,6 +86,7 @@ apps:
       - cups-control
       - gsettings
       - home
+      - mount-observe
       - network
       - network-bind
       - pulseaudio
