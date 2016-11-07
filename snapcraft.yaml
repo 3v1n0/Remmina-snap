@@ -1,0 +1,95 @@
+name: remmina-unstable
+version: 1.2.0-rcgit.16
+summary: Remmina Unstable 1.2.0-rcgit.16
+description: Remmina, a remote desktop client for linux
+grade: "devel"
+confinement: strict
+
+parts:
+  freerdp:
+    plugin: cmake
+    source: https://github.com/FreeRDP/FreeRDP.git
+    source-commit: 1d06087b601a4cc723592e9a6efbf9bee0dc2d12
+    build-packages:
+      - libasound2-dev
+      - libcups2-dev
+      - libjpeg-dev
+      - libpcsclite-dev
+      - libpulse-dev
+      - libssl-dev
+      - libx11-dev
+      - libxcursor-dev
+      - libxdamage-dev
+      - libxext-dev
+      - libxi-dev
+      - libxinerama-dev
+      - libxkbfile-dev
+      - libxrandr-dev
+      - libxv-dev
+    configflags:
+      - -DCMAKE_INSTALL_PREFIX=/
+      - -DWITH_WAYLAND=off
+      - -DWITH_CLIENT=off
+      - -DBUILD_TESTING=on
+      - -DWITH_SERVER=off
+      - -DWITH_PULSE=on
+      - -DWITH_GSTREAMER=off
+      - -DWITH_FFMPEG=off
+      - -DWITH_CHANNELS=on
+      - -DSTATIC_CHANNELS=off
+      - -DWITH_CUPS=on
+      - -DWITH_PCSC=on
+      - -DWITH_JPEG=on
+
+  remmina:
+    plugin: cmake
+    source: https://github.com/FreeRDP/Remmina.git
+    stage-packages:
+      - xauth
+    build-packages:
+      - intltool
+      - libappindicator3-dev
+      - libavahi-ui-gtk3-dev
+      - libfreerdp-dev
+      - libgcrypt20-dev
+      - libgnome-keyring-dev
+      - libgnutls28-dev
+      - libgtk-3-dev
+      - libjpeg-dev
+      - libssh-dev
+      - libtelepathy-glib-dev
+      - libvncserver-dev
+      - libvte-2.91-dev
+      - libxkbfile-dev
+    configflags:
+      - -DCMAKE_PREFIX_PATH=$SNAPCRAFT_STAGE
+      - -DWITH_SURVEY=off
+      # XXX: This is an hack to have a kind of bind-mount with absolute prefix.
+      # See launcher script for more info, to be removed once better solution is there.
+      - -DCMAKE_INSTALL_PREFIX=/tmp/$SNAPCRAFT_PROJECT_NAME
+
+    after:
+      - freerdp
+      - desktop-gtk3
+
+  launcher:
+    plugin: dump
+    source: .
+
+apps:
+  remmina:
+    command: remmina-snap.run /tmp/$SNAPCRAFT_PROJECT_NAME
+    plugs:
+      - cups-control
+      - gsettings
+      - home
+      - network
+      - network-bind
+      - pulseaudio
+      - unity7
+
+slots:
+  remmina-dbus:
+    interface: dbus-app
+    session:
+      - org.Remmina
