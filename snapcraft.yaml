@@ -43,7 +43,8 @@ parts:
 
   remmina:
     plugin: cmake
-    source: https://github.com/FreeRDP/Remmina.git
+    source: https://github.com/3v1n0/Remmina.git
+    source-branch: customizable-app-name
     stage-packages:
       - xauth
     build-packages:
@@ -64,6 +65,8 @@ parts:
     configflags:
       - -DCMAKE_PREFIX_PATH=$SNAPCRAFT_STAGE
       - -DWITH_SURVEY=off
+      # XXX: Remove this as soon as dbus-app interface is available in snapd
+      - -DUNIQUE_APPNAME=INVALID
       # XXX: This is an hack to have a kind of bind-mount with absolute prefix.
       # See launcher script for more info, to be removed once better solution is there.
       - -DCMAKE_INSTALL_PREFIX=/tmp/$SNAPCRAFT_PROJECT_NAME
