@@ -44,6 +44,11 @@ parts:
     organize:
       snap/remmina-unstable/current: .
 
+    snap:
+      - -usr/include
+      - -usr/lib/cmake
+      - -usr/lib/pkgconfig
+
   remmina:
     plugin: cmake
     source: https://github.com/3v1n0/Remmina.git
@@ -92,6 +97,12 @@ apps:
       - network-bind
       - pulseaudio
       - unity7
+
+  winpr-makecert:
+    command: winpr-makecert
+
+  winpr-hash:
+    command: winpr-hash
 
 slots:
   remmina-dbus:
