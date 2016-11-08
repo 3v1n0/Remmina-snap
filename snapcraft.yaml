@@ -27,10 +27,8 @@ parts:
       - libxrandr-dev
       - libxv-dev
     configflags:
-      - -DCMAKE_INSTALL_PREFIX=/
       - -DWITH_WAYLAND=off
       - -DWITH_CLIENT=off
-      - -DBUILD_TESTING=on
       - -DWITH_SERVER=off
       - -DWITH_PULSE=on
       - -DWITH_GSTREAMER=off
@@ -40,6 +38,11 @@ parts:
       - -DWITH_CUPS=on
       - -DWITH_PCSC=on
       - -DWITH_JPEG=on
+
+    # XXX: This is an hack to have a kind of bind-mount with absolute prefix.
+      - -DCMAKE_INSTALL_PREFIX=/snap/$SNAPCRAFT_PROJECT_NAME/current/usr
+    organize:
+      snap/remmina-unstable/current: .
 
   remmina:
     plugin: cmake
@@ -63,25 +66,23 @@ parts:
       - libvte-2.91-dev
       - libxkbfile-dev
     configflags:
-      - -DCMAKE_PREFIX_PATH=$SNAPCRAFT_STAGE
+      - -DCMAKE_PREFIX_PATH=$SNAPCRAFT_STAGE/usr
       - -DWITH_SURVEY=off
       # XXX: Remove this as soon as dbus-app interface is available in snapd
       - -DUNIQUE_APPNAME=INVALID
-      # XXX: This is an hack to have a kind of bind-mount with absolute prefix.
-      # See launcher script for more info, to be removed once better solution is there.
-      - -DCMAKE_INSTALL_PREFIX=/tmp/$SNAPCRAFT_PROJECT_NAME
+
+    # XXX: This is an hack to have a kind of bind-mount with absolute prefix.
+      - -DCMAKE_INSTALL_PREFIX=/snap/$SNAPCRAFT_PROJECT_NAME/current/usr
+    organize:
+      snap/remmina-unstable/current: .
 
     after:
       - freerdp
       - desktop-gtk3
 
-  launcher:
-    plugin: dump
-    source: .
-
 apps:
   remmina:
-    command: remmina-snap.run /tmp/$SNAPCRAFT_PROJECT_NAME
+    command: desktop-launch remmina
     plugs:
       - cups-control
       - gsettings
