@@ -70,7 +70,7 @@ Icon=${SNAP}/meta/gui/icon.svg
 Terminal=false
 Type=Application
 Categories=GTK;GNOME;X-GNOME-NetworkSettings;Network;
-Actions=Profile;Tray;
+Actions=Profile;Tray;Quit;
 
 [Desktop Action Profile]
 Name=Create a New Connection Profile
@@ -121,4 +121,4 @@ Exec=remmina-unstable.remmina --icon
 [Desktop Action Quit]
 Name=Quit
 Exec=remmina-unstable.remmina --quit
-OnlyShowIn=Unity
+OnlyShowIn=Unity;
