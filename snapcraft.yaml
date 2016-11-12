@@ -51,15 +51,14 @@ parts:
 
   remmina:
     plugin: cmake
-    source: https://github.com/3v1n0/Remmina.git
-    source-branch: customizable-app-name
+    source: https://github.com/FreeRDP/Remmina.git
+    source-branch: next
     stage-packages:
       - xauth
     build-packages:
       - intltool
       - libappindicator3-dev
       - libavahi-ui-gtk3-dev
-      - libfreerdp-dev
       - libgcrypt20-dev
       - libgnome-keyring-dev
       - libgnutls28-dev
