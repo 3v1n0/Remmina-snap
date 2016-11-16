@@ -88,6 +88,7 @@ apps:
   remmina:
     command: desktop-launch remmina
     plugs:
+      - avahi-observe
       - cups-control
       - gsettings
       - home
