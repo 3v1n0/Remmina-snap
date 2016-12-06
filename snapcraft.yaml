@@ -32,6 +32,8 @@ parts:
       - -DWITH_SERVER=off
       - -DWITH_PULSE=on
       - -DWITH_GSTREAMER=off
+      - -DWITH_GSTREAMER_1_0=off
+      - -DWITH_GSTREAMER_0_10=off
       - -DWITH_FFMPEG=off
       - -DWITH_CHANNELS=on
       - -DSTATIC_CHANNELS=off
