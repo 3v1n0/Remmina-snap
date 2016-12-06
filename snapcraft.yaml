@@ -83,6 +83,7 @@ parts:
     after:
       - freerdp
       - desktop-gtk3
+      - indicator-gtk3
 
 apps:
   remmina:
