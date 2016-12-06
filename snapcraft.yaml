@@ -109,7 +109,7 @@ apps:
     command: winpr-hash
 
 slots:
-  remmina-dbus:
-    interface: dbus-app
-    session:
-      - org.Remmina
+  remmina-gapp:
+    interface: dbus
+    bus: session
+    name: org.Remmina
