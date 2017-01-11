@@ -17,7 +17,6 @@ parts:
   freerdp:
     plugin: cmake
     source: https://github.com/FreeRDP/FreeRDP.git
-    source-commit: 1d06087b601a4cc723592e9a6efbf9bee0dc2d12
     build-packages:
       - build-essential
       - libasound2-dev
