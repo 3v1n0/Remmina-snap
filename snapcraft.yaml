@@ -82,8 +82,6 @@ parts:
     configflags:
       - -DCMAKE_PREFIX_PATH=$SNAPCRAFT_STAGE/usr
       - -DWITH_SURVEY=off
-      # XXX: Remove this as soon as dbus-app interface is available in snapd
-      - -DUNIQUE_APPNAME=INVALID
 
     # XXX: This is an hack to have a kind of bind-mount with absolute prefix.
       - -DCMAKE_INSTALL_PREFIX=/snap/$SNAPCRAFT_PROJECT_NAME/current/usr
