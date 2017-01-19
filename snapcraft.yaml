@@ -17,6 +17,7 @@ parts:
   freerdp:
     plugin: cmake
     source: https://github.com/FreeRDP/FreeRDP.git
+    source-commit: 0f3dcc27652d9
     build-packages:
       - build-essential
       - libasound2-dev
@@ -62,7 +63,7 @@ parts:
   remmina:
     plugin: cmake
     source: https://github.com/FreeRDP/Remmina.git
-    source-branch: next
+    source-commit: refs/heads/next # Remmina-commit
     stage-packages:
       - xauth
     build-packages:
