@@ -10,7 +10,7 @@ description: |
 
   Remmina is free and open-source software, released under GNU GPL license.
 
-grade: "devel"
+grade: stable
 confinement: strict
 
 parts:
@@ -54,7 +54,7 @@ parts:
     organize:
       snap/remmina/current: .
 
-    snap:
+    prime:
       - -usr/include
       - -usr/lib/cmake
       - -usr/lib/pkgconfig
