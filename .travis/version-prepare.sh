@@ -23,6 +23,8 @@ if [ -n "$ARCH" ]; then
   - $ARCH" >> snapcraft.yaml
 fi
 
+echo -n "$snap_version" > .snapversion
+
 echo "Snap version is $snap_version"
 echo " - Building from git ref $git_ref"
 echo "============"
