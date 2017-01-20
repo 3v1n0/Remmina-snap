@@ -10,12 +10,15 @@ env:
   - MAKEFLAGS='--silent'
   matrix:
   - BUILD_TARGET=release
+  - BUILD_TARGET=release ARCH=i386
   - BUILD_TARGET=next
+  - BUILD_TARGET=next ARCH=i386
 
 install:
-  - docker run --name builder -e TERM -e MAKEFLAGS -v $PWD:$PWD -w $PWD -td snapcore/snapcraft
+  - docker run --name builder -e TERM -e MAKEFLAGS -v $PWD:$PWD -w $PWD
+    -td $(test -n "$ARCH" && echo $ARCH/)ubuntu:xenial
   - docker exec -i builder apt update
-  - docker exec -i builder apt full-upgrade -y
+  - docker exec -i builder apt install snapcraft -y
 
 before_script: .travis/version-prepare.sh
 
@@ -25,9 +28,6 @@ script:
 after_success:
 - openssl aes-256-cbc -K $encrypted_1ce1bbc103e7_key -iv $encrypted_1ce1bbc103e7_iv
   -in .snapcraft/travis_snapcraft.cfg -out .snapcraft/snapcraft.cfg -d
-
-before_deploy:
-  - docker exec -i builder snapcraft status remmina
 
 deploy:
   - provider: script

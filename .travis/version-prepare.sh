@@ -17,6 +17,12 @@ fi
 sed "s,^\(version:\)\([ ]*[0-9.a-z_-+]*\),\1 $snap_version," -i snapcraft.yaml
 sed "s,^\( \+\)\(source-commit:\)\(.*\) \(# Remmina-commit\),\1\2 $git_ref \4," snapcraft.yaml -i snapcraft.yaml
 
+# Sometimes the arch isn't properly recognized by snapcraft
+if [ -n "$ARCH" ]; then
+  echo "architectures:
+  - $ARCH" >> snapcraft.yaml
+fi
+
 echo "Snap version is $snap_version"
 echo " - Building from git ref $git_ref"
 echo "============"
