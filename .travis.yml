@@ -26,7 +26,8 @@ before_script:
   - .travis/version-prepare.sh
 
 script:
-  - docker exec -i builder snapcraft $(test -e ".snap_skip_deploy" && echo prime)
+  - test -e .snap_skip_build ||
+    docker exec -i builder snapcraft $(test -e ".snap_skip_deploy" && echo prime)
 
 deploy:
   - provider: script

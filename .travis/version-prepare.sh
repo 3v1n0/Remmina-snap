@@ -17,7 +17,7 @@ elif [ -n "$BUILD_TARGET" ]; then
 fi
 
 sed "s,^\(version:\)\([ ]*[0-9.a-z_-+]*\),\1 $snap_version," -i snapcraft.yaml
-sed "s,^\( \+\)\(source-commit:\)\(.*\) \(# Remmina-commit\),\1\2 $git_ref \4," snapcraft.yaml -i snapcraft.yaml
+sed "s,^\( \+\)\(source-commit:\)\(.*\) \(# Remmina-commit\),\1\2 $git_ref \4," -i snapcraft.yaml
 
 # Sometimes the arch isn't properly recognized by snapcraft
 if [ -n "$ARCH" ]; then
@@ -39,7 +39,14 @@ if [ -z "$SNAP_FORCE_DEPLOY" ]; then
     echo "============"
     echo "Snap version $snap_version is already available in $channel:"
     echo "  $snap_history" | grep $snap_version | grep $channel | head -n1
-    echo "Skipping deploy, use $SNAP_FORCE_DEPLOY to force"
+
+    if [ "$BUILD_TARGET" ==  "release" ]; then
+      echo "Skipping build, use '\$SNAP_FORCE_BUILD' to force"
+      touch .snap_skip_build
+    else
+      echo "Skipping deploy, use '\$SNAP_FORCE_DEPLOY' to force"
+    fi
+
     touch .snap_skip_deploy
   fi
 fi

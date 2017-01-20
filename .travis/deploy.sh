@@ -7,7 +7,7 @@ if [ "$BUILD_TARGET" == "release" ]; then
 fi
 
 if [ -e ".snap_skip_deploy" ]; then
-  echo "No need to deploy the snap to $channel, use $SNAP_FORCE_DEPLOY to force"
+  echo "No need to deploy the snap to $channel, use '\$SNAP_FORCE_DEPLOY' to force"
   exit 0
 fi
 
