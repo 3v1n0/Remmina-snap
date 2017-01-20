@@ -3,7 +3,7 @@
 channel="edge"
 
 if [ "$BUILD_TARGET" == "release" ]; then
-  channel="stable"
+  channel="$RELEASE_CHANNEL"
 fi
 
 if [ -e ".snap_skip_deploy" ]; then

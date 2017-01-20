@@ -8,6 +8,7 @@ env:
   global:
   - TERM=dumb
   - MAKEFLAGS='--silent'
+  - RELEASE_CHANNEL='candidate'
   matrix:
   - BUILD_TARGET=release
   - BUILD_TARGET=release ARCH=i386

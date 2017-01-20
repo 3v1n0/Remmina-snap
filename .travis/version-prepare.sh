@@ -9,7 +9,7 @@ channel="edge"
 if [ "$BUILD_TARGET" ==  "release" ]; then
   git_ref=$last_tag
   snap_version=$last_version
-  channel="stable"
+  channel="$RELEASE_CHANNEL"
 elif [ -n "$BUILD_TARGET" ]; then
   git_commit=$(git ls-remote --heads $REMMINA_GIT $BUILD_TARGET | cut -f1)
   git_ref="refs/heads/$BUILD_TARGET"
