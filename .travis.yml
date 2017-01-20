@@ -20,14 +20,13 @@ install:
   - docker exec -i builder apt update
   - docker exec -i builder apt install snapcraft -y
 
-before_script: .travis/version-prepare.sh
+before_script:
+  - openssl aes-256-cbc -K $encrypted_1ce1bbc103e7_key -iv $encrypted_1ce1bbc103e7_iv
+    -in .snapcraft/travis_snapcraft.cfg -out .snapcraft/snapcraft.cfg -d
+  - .travis/version-prepare.sh
 
 script:
-  - docker exec -i builder snapcraft
-
-after_success:
-- openssl aes-256-cbc -K $encrypted_1ce1bbc103e7_key -iv $encrypted_1ce1bbc103e7_iv
-  -in .snapcraft/travis_snapcraft.cfg -out .snapcraft/snapcraft.cfg -d
+  - docker exec -i builder snapcraft $(test -e ".snap_skip_deploy" && echo prime)
 
 deploy:
   - provider: script
