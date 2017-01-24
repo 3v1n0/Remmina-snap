@@ -11,9 +11,15 @@ env:
   - RELEASE_CHANNEL='candidate'
   matrix:
   - BUILD_TARGET=release
-  - BUILD_TARGET=release ARCH=i386
   - BUILD_TARGET=next
+  - BUILD_TARGET=release ARCH=i386
   - BUILD_TARGET=next ARCH=i386
+  # - BUILD_TARGET=release ARCH=armhf
+  # - BUILD_TARGET=next ARCH=armhf
+  # - BUILD_TARGET=release ARCH=aarch64
+  # - BUILD_TARGET=next ARCH=aarch64
+  # - BUILD_TARGET=release ARCH=s390x
+  # - BUILD_TARGET=next ARCH=s390x
 
 install:
   - docker run --name builder -e TERM -e MAKEFLAGS -v $PWD:$PWD -w $PWD
