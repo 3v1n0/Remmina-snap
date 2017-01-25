@@ -1,5 +1,5 @@
 name: remmina
-version: 1.2.0+git0
+version: 1.2.0-rcgit.17
 summary: The GTK+ Remote Desktop Client
 description: |
   Remmina is a remote desktop client written in GTK+, aiming to be useful for
@@ -63,7 +63,7 @@ parts:
   remmina:
     plugin: cmake
     source: https://github.com/FreeRDP/Remmina.git
-    source-commit: refs/heads/next # Remmina-commit
+    source-commit: v1.2.0-rcgit.17 # Remmina-commit
     stage-packages:
       - xauth
     build-packages:
