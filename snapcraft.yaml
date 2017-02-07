@@ -17,7 +17,7 @@ parts:
   freerdp:
     plugin: cmake
     source: https://github.com/FreeRDP/FreeRDP.git
-    source-commit: 0f3dcc27652d9
+    source-depth: 1
     build-packages:
       - build-essential
       - libasound2-dev
@@ -64,6 +64,9 @@ parts:
     plugin: cmake
     source: https://github.com/FreeRDP/Remmina.git
     source-commit: v1.2.0-rcgit.17 # Remmina-commit
+    prepare: |
+      cd ../src
+      wget -qO - https://github.com/FreeRDP/Remmina/commit/7008e5c0.patch | patch -Np1 || true
     stage-packages:
       - xauth
     build-packages:
@@ -80,6 +83,9 @@ parts:
       - libvncserver-dev
       - libvte-2.91-dev
       - libxkbfile-dev
+      # Only needed for prepare script
+      - patch
+      - wget
     configflags:
       - -DCMAKE_PREFIX_PATH=$SNAPCRAFT_STAGE/usr
       - -DWITH_SURVEY=off
